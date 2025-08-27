@@ -36,31 +36,31 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full layout-stable ${
         scrolled 
           ? 'bg-dark-800/95 backdrop-blur-md shadow-lg' 
           : 'bg-transparent'
       }`}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+      <div className="container-custom w-full mobile-stable-layout">
+        <div className="flex items-center justify-between h-16 sm:h-20 w-full mobile-fixed-dimensions">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-lg sm:text-xl md:text-2xl font-bold gradient-text cursor-pointer"
+            className="text-lg sm:text-xl md:text-2xl font-bold gradient-text cursor-pointer mobile-fixed-dimensions"
             onClick={() => scrollToSection('home')}
           >
             INAD PROMOTION
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8 mobile-fixed-dimensions">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-white hover:text-primary-400 transition-colors duration-300 font-medium text-sm lg:text-base"
+                className="text-white hover:text-primary-400 transition-colors duration-300 font-medium text-sm lg:text-base mobile-fixed-dimensions"
                 onClick={() => scrollToSection(item.id)}
               >
                 {item.label}
@@ -69,7 +69,7 @@ const Navbar = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary text-sm lg:text-base"
+              className="btn-primary text-sm lg:text-base mobile-fixed-dimensions"
             >
               Get Started
             </motion.button>
@@ -78,7 +78,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="md:hidden text-white text-xl sm:text-2xl p-2"
+            className="md:hidden text-white text-xl sm:text-2xl p-2 mobile-fixed-dimensions"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -93,21 +93,21 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-dark-800/95 backdrop-blur-md rounded-b-2xl overflow-hidden border-t border-dark-600/30"
+              className="md:hidden bg-dark-800/95 backdrop-blur-md rounded-b-2xl overflow-hidden border-t border-dark-600/30 w-full mobile-stable-layout"
             >
-              <div className="py-4 sm:py-6 space-y-2 sm:space-y-4">
+              <div className="py-4 sm:py-6 space-y-2 sm:space-y-4 w-full mobile-fixed-dimensions">
                 {navItems.map((item) => (
                   <motion.button
                     key={item.id}
                     whileHover={{ x: 10 }}
-                    className="block w-full text-left text-white hover:text-primary-400 transition-colors duration-300 font-medium px-6 py-3 sm:py-4 text-base sm:text-lg"
+                    className="block w-full text-left text-white hover:text-primary-400 transition-colors duration-300 font-medium px-6 py-3 sm:py-4 text-base sm:text-lg mobile-fixed-dimensions"
                     onClick={() => scrollToSection(item.id)}
                   >
                     {item.label}
                   </motion.button>
                 ))}
-                <div className="px-6 pt-2 sm:pt-4">
-                  <button className="btn-primary w-full text-base sm:text-lg py-3 sm:py-4">
+                <div className="px-6 pt-2 sm:pt-4 w-full mobile-fixed-dimensions">
+                  <button className="btn-primary w-full text-base sm:text-lg py-3 sm:py-4 mobile-fixed-dimensions">
                     Get Started
                   </button>
                 </div>
