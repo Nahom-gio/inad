@@ -37,17 +37,17 @@ const Blog = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Latest <span className="gradient-text">Insights</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Stay updated with the latest trends, strategies, and insights in experiential marketing
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
@@ -66,25 +66,25 @@ const Blog = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-300 text-sm font-medium rounded-full border border-primary-500/30">
+                    <span className="inline-block px-2 sm:px-3 py-1 bg-primary-500/20 text-primary-300 text-xs sm:text-sm font-medium rounded-full border border-primary-500/30">
                       {post.category}
                     </span>
-                    <span className="text-gray-400 text-sm">
+                    <span className="text-gray-400 text-xs sm:text-sm">
                       {post.date}
                     </span>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-primary-300 transition-colors duration-300">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3 group-hover:text-primary-300 transition-colors duration-300">
                     {post.title}
                   </h3>
-                  <p className="text-gray-300 mb-4 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 leading-relaxed">
                     {post.excerpt}
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-primary-400 hover:text-primary-300 font-medium transition-colors duration-300"
+                    className="text-primary-400 hover:text-primary-300 font-medium transition-colors duration-300 text-sm sm:text-base"
                   >
                     Read More →
                   </motion.button>
@@ -99,12 +99,12 @@ const Blog = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="btn-secondary text-lg px-10 py-4"
+            className="btn-secondary text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4"
           >
             View All Articles
           </motion.button>

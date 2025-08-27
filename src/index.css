@@ -12,26 +12,174 @@
   body {
     font-family: 'Inter', sans-serif;
   }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+    
+    /* Better touch targets for mobile */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improved mobile scrolling */
+    .smooth-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm sm:text-base;
   }
   
   .btn-secondary {
-    @apply bg-transparent border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105;
+    @apply bg-transparent border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-full transition-all duration-300 transform hover:scale-105 text-sm sm:text-base;
   }
   
   .section-padding {
-    @apply py-20 px-4 sm:px-6 lg:px-8;
+    @apply py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8;
   }
   
   .container-custom {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
   .gradient-text {
     @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  /* Mobile-first responsive utilities */
+  .mobile-container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-text-sm {
+    @apply text-sm sm:text-base;
+  }
+  
+  .mobile-text-base {
+    @apply text-base sm:text-lg;
+  }
+  
+  .mobile-text-lg {
+    @apply text-lg sm:text-xl;
+  }
+  
+  .mobile-text-xl {
+    @apply text-xl sm:text-2xl;
+  }
+  
+  .mobile-text-2xl {
+    @apply text-2xl sm:text-3xl;
+  }
+  
+  .mobile-text-3xl {
+    @apply text-3xl sm:text-4xl;
+  }
+  
+  .mobile-text-4xl {
+    @apply text-4xl sm:text-5xl;
+  }
+  
+  .mobile-text-5xl {
+    @apply text-5xl sm:text-6xl lg:text-7xl;
+  }
+  
+  .mobile-grid-1 {
+    @apply grid-cols-1;
+  }
+  
+  .mobile-grid-2 {
+    @apply grid-cols-1 sm:grid-cols-2;
+  }
+  
+  .mobile-grid-3 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .mobile-grid-4 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+  }
+  
+  .mobile-flex-col {
+    @apply flex-col sm:flex-row;
+  }
+  
+  .mobile-space-y {
+    @apply space-y-4 sm:space-y-6;
+  }
+  
+  .mobile-gap {
+    @apply gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  /* Mobile-specific component improvements */
+  .mobile-nav-item {
+    @apply block w-full text-left py-3 px-4 text-base font-medium;
+  }
+  
+  .mobile-form-input {
+    @apply w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base;
+  }
+  
+  .mobile-card {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+  
+  .mobile-button {
+    @apply py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base;
+  }
+
+  /* Mobile navigation improvements */
+  .mobile-menu {
+    @apply fixed inset-0 z-50 bg-dark-900/95 backdrop-blur-md;
+  }
+  
+  .mobile-menu-content {
+    @apply flex flex-col justify-center items-center h-full space-y-8;
+  }
+  
+  .mobile-menu-item {
+    @apply text-2xl font-medium text-white hover:text-primary-400 transition-colors duration-300;
+  }
+
+  /* Mobile form improvements */
+  .mobile-form-group {
+    @apply space-y-2 sm:space-y-3;
+  }
+  
+  .mobile-form-label {
+    @apply block text-sm sm:text-base font-medium text-white mb-2;
+  }
+  
+  .mobile-form-field {
+    @apply w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-700/50 border border-dark-600/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors duration-300 text-sm sm:text-base;
+  }
+
+  /* Mobile grid improvements */
+  .mobile-grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  .mobile-grid-2-responsive {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12;
+  }
+
+  /* Mobile spacing improvements */
+  .mobile-section {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+  
+  .mobile-margin {
+    @apply my-8 sm:my-12 lg:my-16;
+  }
+  
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
   }
 }
