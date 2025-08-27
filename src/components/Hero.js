@@ -19,8 +19,17 @@ const Hero = () => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback"
+          className="w-full h-full object-cover pointer-events-none"
           poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1920&h=1080&fit=crop"
+          style={{
+            touchAction: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            userSelect: 'none'
+          }}
         >
           <source src="/bg.mp4" type="video/mp4" />
           Your browser does not support the video tag.
