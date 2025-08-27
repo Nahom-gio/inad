@@ -12,24 +12,24 @@ const ClientLogos = () => {
   ];
 
   return (
-    <section className="py-16 bg-dark-800">
+    <section className="py-12 sm:py-16 bg-dark-800">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h3 className="text-2xl font-semibold text-gray-300 mb-2">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-300 mb-2">
             Trusted by Leading Brands
           </h3>
-          <p className="text-lg text-gray-400">
+          <p className="text-base sm:text-lg text-gray-400 px-4">
             We've helped these companies create unforgettable experiences
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 items-center">
           {clients.map((client, index) => (
             <motion.div
               key={client.id}
@@ -38,12 +38,13 @@ const ClientLogos = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
-              className="flex justify-center items-center p-4 bg-dark-700/30 rounded-xl border border-dark-600/20 hover:border-primary-500/30 transition-all duration-300"
+              className="flex justify-center items-center p-3 sm:p-4 bg-dark-700/30 rounded-xl border border-dark-600/20 hover:border-primary-500/30 transition-all duration-300"
             >
               <img
                 src={client.logo}
                 alt={client.name}
                 className="max-w-full h-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
+                style={{ maxHeight: '60px' }}
               />
             </motion.div>
           ))}

@@ -34,17 +34,17 @@ const FeaturedProjects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Discover how we've transformed brands through innovative experiential marketing
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -64,14 +64,14 @@ const FeaturedProjects = () => {
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-300 text-sm font-medium rounded-full mb-3 border border-primary-500/30">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <span className="inline-block px-2 sm:px-3 py-1 bg-primary-500/20 text-primary-300 text-xs sm:text-sm font-medium rounded-full mb-2 sm:mb-3 border border-primary-500/30">
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -85,12 +85,12 @@ const FeaturedProjects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-12"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="btn-secondary text-lg px-10 py-4"
+            className="btn-secondary text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4"
           >
             View All Projects
           </motion.button>

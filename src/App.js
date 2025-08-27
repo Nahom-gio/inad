@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <Router>
-      <div className="App bg-dark-900 text-white min-h-screen touch-pan-y">
+      <div className="App bg-dark-900 text-white min-h-screen w-full overflow-x-hidden layout-stable stable-container">
         <Navbar />
         <Hero />
         <ServiceHighlights />
