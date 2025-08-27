@@ -321,7 +321,8 @@
 
   /* Layout stability classes */
   .layout-stable {
-    @apply transform-gpu backface-hidden;
+    @apply transform-gpu;
+    backface-visibility: hidden;
   }
 
   .stable-height {
