@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+
 import { motion } from 'framer-motion';
+
 import { useInView } from 'react-intersection-observer';
+
 import {
   FaEnvelope,
   FaWhatsapp,
@@ -9,6 +12,9 @@ import {
   FaExclamationTriangle,
   FaCheckCircle,
 } from 'react-icons/fa';
+
+import { submitContactForm } from '../utils/api';
+
 import {
   checkRateLimit,
   validateHoneypot,
@@ -16,7 +22,6 @@ import {
   validateSubmissionFrequency,
   getClientFingerprint,
 } from '../utils/security';
-import { submitContactForm } from '../utils/api';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -298,7 +303,6 @@ const Contact = () => {
     <section
       id='contact'
       className='section-padding bg-dark-800'
-      role='region'
       aria-label='Contact us'
     >
       {/* Screen reader announcements */}
@@ -321,14 +325,12 @@ const Contact = () => {
         >
           <h2
             className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6'
-            role='heading'
             aria-level='2'
           >
             Let's <span className='gradient-text'>Connect</span>
           </h2>
           <p
             className='text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4'
-            role='text'
             aria-label='Contact form description'
           >
             Ready to create something amazing together? Get in touch and let's
@@ -344,8 +346,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h3
-              className='text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6'
-              role='heading'
+              className='text-xl sm:text-3xl font-semibold text-white mb-4 sm:mb-6'
               aria-level='3'
             >
               Send us a Message
@@ -376,7 +377,6 @@ const Contact = () => {
                 onSubmit={handleSubmit}
                 className='space-y-4 sm:space-y-6'
                 noValidate
-                role='form'
                 aria-label='Contact form'
                 aria-describedby='form-instructions'
               >
@@ -729,7 +729,6 @@ const Contact = () => {
           >
             <h3
               className='text-xl sm:text-2xl font-semibold text-white mb-6 sm:mb-8'
-              role='heading'
               aria-level='3'
             >
               Get in Touch
@@ -775,11 +774,10 @@ const Contact = () => {
             </div>
 
             <div className='mt-8 sm:mt-12 p-4 sm:p-6 bg-dark-700/30 rounded-2xl border border-dark-600/20'>
-              <h4
-                className='text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3'
-                role='heading'
-                aria-level='4'
-              >
+                          <h4
+              className='text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3'
+              aria-level='4'
+            >
                 Office Hours
               </h4>
               <div

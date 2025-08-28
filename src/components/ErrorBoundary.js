@@ -76,7 +76,7 @@ class ErrorBoundary extends React.Component {
   }
 
   // Send error to monitoring service
-  sendErrorToMonitoring = async errorReport => {
+  async sendErrorToMonitoring(errorReport) {
     try {
       // In production, send to your error monitoring service
       // Example: Sentry, LogRocket, etc.
@@ -94,10 +94,10 @@ class ErrorBoundary extends React.Component {
     } catch (error) {
       console.warn('Failed to send error to monitoring service:', error);
     }
-  };
+  }
 
   // Reset error state and retry
-  handleRetry = () => {
+  handleRetry() {
     const { retryCount } = this.state;
 
     if (retryCount < this.maxRetries) {
@@ -112,17 +112,17 @@ class ErrorBoundary extends React.Component {
       // After max retries, reload the page
       window.location.reload();
     }
-  };
+  }
 
-  handleReload = () => {
+  handleReload() {
     window.location.reload();
-  };
+  }
 
-  handleGoHome = () => {
+  handleGoHome() {
     window.location.href = '/';
-  };
+  }
 
-  handleReportError = () => {
+  handleReportError() {
     const { error, errorInfo, errorId } = this.state;
 
     // Create error report
@@ -145,7 +145,7 @@ class ErrorBoundary extends React.Component {
     alert(
       `Error reported with ID: ${errorId}. Please contact support with this ID.`
     );
-  };
+  }
 
   // Cleanup on unmount
   componentWillUnmount() {

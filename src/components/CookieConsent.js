@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
+
 import { FaCookieBite, FaTimes, FaCheck, FaCog } from 'react-icons/fa';
 
 const CookieConsent = () => {

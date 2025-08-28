@@ -5,7 +5,9 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
+
 import { motion } from 'framer-motion';
+
 import {
   FaChevronDown,
   FaPlay,
@@ -216,7 +218,6 @@ const Hero = () => {
             msUserSelect: 'none',
             userSelect: 'none',
           }}
-          role='video'
           aria-label='Background video showing INAD PROMOTION events and activities'
         >
           <source src='/bg.mp4' type='video/mp4' />
@@ -286,7 +287,6 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight mobile-text-stable'
-          role='heading'
           aria-level='1'
         >
           We Create
@@ -299,7 +299,6 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-2 mobile-text-stable'
-          role='text'
           aria-label='Description of INAD PROMOTION services'
         >
           Transform your brand with immersive experiential marketing that

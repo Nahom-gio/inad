@@ -1,4 +1,5 @@
 // Performance utility functions for the INAD PROMOTION website
+import React from 'react';
 
 // Lazy loading utilities
 export const lazyLoading = {
@@ -158,11 +159,9 @@ export const imageOptimization = {
       xl: '1280px',
     }
   ) => {
-    return (
-      Object.entries(breakpoints)
-        .map(([breakpoint, width]) => `(min-width: ${width}) ${width}`)
-        .join(', ') + ', 100vw'
-    );
+    return `${Object.entries(breakpoints)
+      .map(([breakpoint, width]) => `(min-width: ${width}) ${width}`)
+      .join(', ')}, 100vw`;
   },
 
   // Preload critical images

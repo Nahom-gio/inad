@@ -106,14 +106,15 @@ export const sanitizeAndValidate = (input, type = 'text') => {
 
   // Type-specific validation
   switch (type) {
-    case 'email':
+    case 'email': {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(sanitized)) {
         return { isValid: false, value: '', error: 'Invalid email format' };
       }
       break;
+    }
 
-    case 'name':
+    case 'name': {
       const nameRegex = /^[a-zA-Z\s'-]+$/;
       if (!nameRegex.test(sanitized)) {
         return {
@@ -137,13 +138,14 @@ export const sanitizeAndValidate = (input, type = 'text') => {
         };
       }
       break;
+    }
 
-    case 'company':
+    case 'company': {
       if (sanitized.length > 100) {
         return {
           isValid: false,
           value: '',
-          error: 'Company name must be less than 100 characters',
+          error: 'Company name must be less than 50 characters',
         };
       }
       const companyRegex = /^[a-zA-Z0-9\s&.,'-]+$/;
@@ -155,8 +157,9 @@ export const sanitizeAndValidate = (input, type = 'text') => {
         };
       }
       break;
+    }
 
-    case 'message':
+    case 'message': {
       if (sanitized.length < 10) {
         return {
           isValid: false,
@@ -172,6 +175,7 @@ export const sanitizeAndValidate = (input, type = 'text') => {
         };
       }
       break;
+    }
   }
 
   return { isValid: true, value: sanitized, error: '' };

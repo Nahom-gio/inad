@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+
 import { motion } from 'framer-motion';
+
 import { useInView } from 'react-intersection-observer';
+
 import {
   FaEnvelope,
   FaCheckCircle,
@@ -99,7 +102,6 @@ const Newsletter = () => {
     <section
       ref={ref}
       className='bg-gradient-to-r from-dark-800 to-dark-900 py-16 sm:py-20'
-      role='region'
       aria-label='Newsletter subscription'
     >
       {/* Screen reader announcements */}
@@ -121,7 +123,6 @@ const Newsletter = () => {
         >
           <h2
             className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6'
-            role='heading'
             aria-level='2'
           >
             Stay <span className='gradient-text'>Connected</span>
@@ -129,7 +130,6 @@ const Newsletter = () => {
 
           <p
             className='text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto'
-            role='text'
             aria-label='Newsletter description'
           >
             Get the latest insights, industry trends, and exclusive offers
@@ -164,7 +164,6 @@ const Newsletter = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               onSubmit={handleSubmit}
               className='flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-lg mx-auto'
-              role='form'
               aria-label='Newsletter subscription form'
               noValidate
             >
