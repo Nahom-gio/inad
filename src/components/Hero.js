@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, {
   useState,
   useEffect,
@@ -5,8 +6,6 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
-
-import { motion } from 'framer-motion';
 import {
   FaChevronDown,
   FaPlay,

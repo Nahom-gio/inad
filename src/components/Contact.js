@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   FaEnvelope,
   FaPhone,
@@ -14,6 +12,8 @@ import {
   FaCheckCircle,
   FaExclamationTriangle,
 } from 'react-icons/fa';
+
+import { useInView } from 'react-intersection-observer';
 
 import { submitContactForm } from '../utils/api';
 import {

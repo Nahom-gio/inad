@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+
 import { useInView } from 'react-intersection-observer';
+
 import MobileButton from './MobileButton';
 import OptimizedImage from './OptimizedImage';
+
 import {
   breakpoints,
   typography,

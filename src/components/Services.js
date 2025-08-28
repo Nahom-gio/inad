@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 import {
   FaLightbulb,
   FaMapMarkerAlt,
@@ -9,6 +7,7 @@ import {
   FaGift,
   FaChartLine,
 } from 'react-icons/fa';
+import { useInView } from 'react-intersection-observer';
 
 const Services = () => {
   const [ref, inView] = useInView({

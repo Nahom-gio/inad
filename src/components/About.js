@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 import { FaCalendarAlt, FaUsers, FaHeart } from 'react-icons/fa';
+import { useInView } from 'react-intersection-observer';
 
 const About = () => {
   const [ref, inView] = useInView({

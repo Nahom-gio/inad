@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { render, screen, fireEvent } from '../../utils/test-utils';
 import ErrorBoundary from '../ErrorBoundary';
 

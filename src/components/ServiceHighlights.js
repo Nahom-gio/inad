@@ -1,13 +1,12 @@
-import React from 'react';
-
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 import {
   FaLightbulb,
   FaPalette,
   FaCalendarCheck,
   FaRocket,
 } from 'react-icons/fa';
+import { useInView } from 'react-intersection-observer';
 
 const ServiceHighlights = () => {
   const [ref, inView] = useInView({

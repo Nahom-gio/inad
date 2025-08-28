@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   FaEnvelope,
   FaCheckCircle,
   FaExclamationTriangle,
 } from 'react-icons/fa';
+import { useInView } from 'react-intersection-observer';
 
 const Newsletter = () => {
   const [ref, inView] = useInView({
