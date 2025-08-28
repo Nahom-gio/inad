@@ -7,7 +7,7 @@ export const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
       swRegistration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
+        scope: '/',
       });
 
       console.log('Service Worker registered successfully:', swRegistration);
@@ -15,9 +15,12 @@ export const registerServiceWorker = async () => {
       // Handle service worker updates
       swRegistration.addEventListener('updatefound', () => {
         const newWorker = swRegistration.installing;
-        
+
         newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (
+            newWorker.state === 'installed' &&
+            navigator.serviceWorker.controller
+          ) {
             // New service worker available
             showUpdateNotification();
           }
@@ -25,14 +28,14 @@ export const registerServiceWorker = async () => {
       });
 
       // Handle service worker messages
-      navigator.serviceWorker.addEventListener('message', (event) => {
+      navigator.serviceWorker.addEventListener('message', event => {
         if (event.data && event.data.type === 'SW_UPDATED') {
           console.log('Service Worker updated');
         }
       });
 
       // Handle service worker errors
-      navigator.serviceWorker.addEventListener('error', (error) => {
+      navigator.serviceWorker.addEventListener('error', error => {
         console.error('Service Worker error:', error);
       });
 
@@ -115,16 +118,16 @@ const showUpdateNotification = () => {
       actions: [
         {
           action: 'update',
-          title: 'Update Now'
+          title: 'Update Now',
         },
         {
           action: 'dismiss',
-          title: 'Later'
-        }
-      ]
+          title: 'Later',
+        },
+      ],
     });
 
-    notification.addEventListener('click', (event) => {
+    notification.addEventListener('click', event => {
       if (event.action === 'update') {
         updateServiceWorker();
       }
@@ -147,7 +150,8 @@ const showUpdateNotification = () => {
 const showInPageUpdateNotification = () => {
   // Create update notification element
   const notification = document.createElement('div');
-  notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-sm';
+  notification.className =
+    'fixed top-4 right-4 bg-blue-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-sm';
   notification.innerHTML = `
     <div class="flex items-start">
       <div class="flex-shrink-0">
@@ -180,7 +184,9 @@ const showInPageUpdateNotification = () => {
   // Add event listeners
   const updateButton = notification.querySelector('button:first-of-type');
   const laterButton = notification.querySelector('button:last-of-type');
-  const closeButton = notification.querySelector('button.bg-blue-400.hover\\:bg-blue-300');
+  const closeButton = notification.querySelector(
+    'button.bg-blue-400.hover\\:bg-blue-300'
+  );
 
   updateButton.addEventListener('click', () => {
     updateServiceWorker();
@@ -229,7 +235,7 @@ export const getNotificationPermission = () => {
 };
 
 // Send message to service worker
-export const sendMessageToSW = (message) => {
+export const sendMessageToSW = message => {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage(message);
   }
@@ -247,7 +253,7 @@ export const getServiceWorkerState = () => {
       installing: swRegistration.installing?.state || null,
       waiting: swRegistration.waiting?.state || null,
       active: swRegistration.active?.state || null,
-      controlling: isServiceWorkerControlling()
+      controlling: isServiceWorkerControlling(),
     };
   }
   return null;

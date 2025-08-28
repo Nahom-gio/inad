@@ -24,7 +24,8 @@
   }
 
   /* Performance: Reduce repaints for fixed elements */
-  .fixed, .sticky {
+  .fixed,
+  .sticky {
     will-change: transform;
     transform: translateZ(0);
   }
@@ -117,15 +118,15 @@
     .text-gray-300 {
       color: #000000 !important;
     }
-    
+
     .text-gray-400 {
       color: #000000 !important;
     }
-    
+
     .bg-dark-700\/50 {
       background-color: #ffffff !important;
     }
-    
+
     .border-dark-600\/30 {
       border-color: #000000 !important;
     }
@@ -136,7 +137,7 @@
     .text-gray-300 {
       color: #d1d5db !important;
     }
-    
+
     .text-gray-400 {
       color: #9ca3af !important;
     }
@@ -147,7 +148,7 @@
     .text-sm {
       font-size: 1rem !important;
     }
-    
+
     .text-xs {
       font-size: 0.875rem !important;
     }
@@ -456,11 +457,11 @@
     @apply sr-only;
   }
 
-  .live-region[aria-live="polite"] {
+  .live-region[aria-live='polite'] {
     @apply sr-only;
   }
 
-  .live-region[aria-live="assertive"] {
+  .live-region[aria-live='assertive'] {
     @apply sr-only;
   }
 
@@ -886,7 +887,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -1025,8 +1027,8 @@
     @apply text-black underline;
   }
 
-  a[href^="http"]::after {
-    content: " (" attr(href) ")";
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
   }
 }
 

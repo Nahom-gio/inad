@@ -38,7 +38,9 @@ describe('ErrorBoundary Component', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.queryByText('Something went wrong')).not.toBeInTheDocument();
+      expect(
+        screen.queryByText('Something went wrong')
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -51,7 +53,9 @@ describe('ErrorBoundary Component', () => {
       );
 
       expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-      expect(screen.getByText(/We're sorry, but something unexpected happened/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/We're sorry, but something unexpected happened/)
+      ).toBeInTheDocument();
     });
 
     test('generates unique error ID when error occurs', () => {
@@ -63,7 +67,7 @@ describe('ErrorBoundary Component', () => {
 
       const errorIdElement = screen.getByText(/Error ID:/);
       expect(errorIdElement).toBeInTheDocument();
-      
+
       const errorId = errorIdElement.textContent.match(/Error ID: (.+)/)[1];
       expect(errorId).toMatch(/^error-\d+-\w+$/);
     });
@@ -105,7 +109,9 @@ describe('ErrorBoundary Component', () => {
     });
 
     test('shows error description', () => {
-      const description = screen.getByText(/We're sorry, but something unexpected happened/);
+      const description = screen.getByText(
+        /We're sorry, but something unexpected happened/
+      );
       expect(description).toBeInTheDocument();
     });
 
@@ -131,13 +137,17 @@ describe('ErrorBoundary Component', () => {
     });
 
     test('renders Go to Homepage button', () => {
-      const homeButton = screen.getByRole('button', { name: /go to homepage/i });
+      const homeButton = screen.getByRole('button', {
+        name: /go to homepage/i,
+      });
       expect(homeButton).toBeInTheDocument();
       expect(homeButton).toHaveClass('bg-gray-200');
     });
 
     test('renders Report This Error button', () => {
-      const reportButton = screen.getByRole('button', { name: /report this error/i });
+      const reportButton = screen.getByRole('button', {
+        name: /report this error/i,
+      });
       expect(reportButton).toBeInTheDocument();
       expect(reportButton).toHaveClass('bg-red-600');
     });
@@ -153,7 +163,7 @@ describe('ErrorBoundary Component', () => {
         },
         writable: true,
       });
-      
+
       // Mock alert
       global.alert = jest.fn();
 
@@ -172,14 +182,18 @@ describe('ErrorBoundary Component', () => {
     });
 
     test('Go to Homepage button navigates to home', () => {
-      const homeButton = screen.getByRole('button', { name: /go to homepage/i });
+      const homeButton = screen.getByRole('button', {
+        name: /go to homepage/i,
+      });
       fireEvent.click(homeButton);
 
       expect(window.location.href).toBe('/');
     });
 
     test('Report This Error button shows alert with error ID', () => {
-      const reportButton = screen.getByRole('button', { name: /report this error/i });
+      const reportButton = screen.getByRole('button', {
+        name: /report this error/i,
+      });
       fireEvent.click(reportButton);
 
       expect(global.alert).toHaveBeenCalledWith(
@@ -199,7 +213,9 @@ describe('ErrorBoundary Component', () => {
         </ErrorBoundary>
       );
 
-      const detailsElement = screen.getByText(/Show Error Details \(Development\)/);
+      const detailsElement = screen.getByText(
+        /Show Error Details \(Development\)/
+      );
       expect(detailsElement).toBeInTheDocument();
 
       process.env.NODE_ENV = originalEnv;
@@ -224,15 +240,19 @@ describe('ErrorBoundary Component', () => {
 
   describe('Error Reporting', () => {
     test('creates comprehensive error report', () => {
-      const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-      
+      const consoleSpy = jest
+        .spyOn(console, 'log')
+        .mockImplementation(() => {});
+
       render(
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />
         </ErrorBoundary>
       );
 
-      const reportButton = screen.getByRole('button', { name: /report this error/i });
+      const reportButton = screen.getByRole('button', {
+        name: /report this error/i,
+      });
       fireEvent.click(reportButton);
 
       expect(consoleSpy).toHaveBeenCalledWith(
@@ -296,8 +316,14 @@ describe('ErrorBoundary Component', () => {
         </ErrorBoundary>
       );
 
-      const mainContainer = screen.getByText('Something went wrong').closest('div');
-      expect(mainContainer).toHaveClass('flex', 'items-center', 'justify-center');
+      const mainContainer = screen
+        .getByText('Something went wrong')
+        .closest('div');
+      expect(mainContainer).toHaveClass(
+        'flex',
+        'items-center',
+        'justify-center'
+      );
     });
   });
 });

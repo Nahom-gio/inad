@@ -1,10 +1,10 @@
 // Mobile-first responsive breakpoints
 export const breakpoints = {
-  xs: '320px',    // Small phones
-  sm: '576px',    // Large phones
-  md: '768px',    // Tablets
-  lg: '1024px',   // Small laptops
-  xl: '1280px',   // Large laptops
+  xs: '320px', // Small phones
+  sm: '576px', // Large phones
+  md: '768px', // Tablets
+  lg: '1024px', // Small laptops
+  xl: '1280px', // Large laptops
   '2xl': '1536px', // Desktop
 };
 
@@ -21,26 +21,27 @@ export const touchTargets = {
 export const performance = {
   // Reduce motion for users who prefer it
   reducedMotion: '@media (prefers-reduced-motion: reduce)',
-  
+
   // Low-end device optimizations
   lowEndDevice: '@media (max-width: 768px) and (max-device-memory: 4gb)',
-  
+
   // High DPI displays
-  highDPI: '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
-  
+  highDPI:
+    '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
+
   // Battery saver mode
   batterySaver: '@media (prefers-reduced-data: reduce)',
 };
 
 // Responsive spacing scale
 export const spacing = {
-  xs: '0.25rem',   // 4px
-  sm: '0.5rem',    // 8px
-  md: '1rem',      // 16px
-  lg: '1.5rem',    // 24px
-  xl: '2rem',      // 32px
-  '2xl': '3rem',   // 48px
-  '3xl': '4rem',   // 64px
+  xs: '0.25rem', // 4px
+  sm: '0.5rem', // 8px
+  md: '1rem', // 16px
+  lg: '1.5rem', // 24px
+  xl: '2rem', // 32px
+  '2xl': '3rem', // 48px
+  '3xl': '4rem', // 64px
 };
 
 // Z-index scale for proper layering
@@ -73,7 +74,7 @@ export const mediaQuery = {
   tablet: `@media (min-width: ${breakpoints.md})`,
   desktop: `@media (min-width: ${breakpoints.lg})`,
   wide: `@media (min-width: ${breakpoints.xl})`,
-  
+
   // Max width queries for specific device targeting
   mobileOnly: `@media (max-width: ${breakpoints.md})`,
   tabletOnly: `@media (min-width: ${breakpoints.md}) and (max-width: ${breakpoints.lg})`,
@@ -129,14 +130,14 @@ export const performanceStyles = {
     backfaceVisibility: 'hidden',
     perspective: '1000px',
   },
-  
+
   // Reduced motion styles
   reducedMotion: {
     transition: 'none',
     animation: 'none',
     transform: 'none',
   },
-  
+
   // Low-end device optimizations
   lowEndDevice: {
     // Reduce shadows and effects
@@ -169,34 +170,34 @@ export const grid = {
 // Typography scale optimized for mobile
 export const typography = {
   h1: {
-    mobile: '1.75rem',    // 28px
-    tablet: '2.25rem',    // 36px
-    desktop: '3rem',      // 48px
-    wide: '3.75rem',      // 60px
+    mobile: '1.75rem', // 28px
+    tablet: '2.25rem', // 36px
+    desktop: '3rem', // 48px
+    wide: '3.75rem', // 60px
   },
   h2: {
-    mobile: '1.5rem',     // 24px
-    tablet: '1.875rem',   // 30px
-    desktop: '2.25rem',   // 36px
-    wide: '3rem',         // 48px
+    mobile: '1.5rem', // 24px
+    tablet: '1.875rem', // 30px
+    desktop: '2.25rem', // 36px
+    wide: '3rem', // 48px
   },
   h3: {
-    mobile: '1.25rem',    // 20px
-    tablet: '1.5rem',     // 24px
-    desktop: '1.875rem',  // 30px
-    wide: '2.25rem',      // 36px
+    mobile: '1.25rem', // 20px
+    tablet: '1.5rem', // 24px
+    desktop: '1.875rem', // 30px
+    wide: '2.25rem', // 36px
   },
   body: {
-    mobile: '1rem',       // 16px
-    tablet: '1.125rem',   // 18px
-    desktop: '1.125rem',  // 18px
-    wide: '1.125rem',     // 18px
+    mobile: '1rem', // 16px
+    tablet: '1.125rem', // 18px
+    desktop: '1.125rem', // 18px
+    wide: '1.125rem', // 18px
   },
   small: {
-    mobile: '0.875rem',   // 14px
-    tablet: '0.875rem',   // 14px
-    desktop: '0.875rem',  // 14px
-    wide: '0.875rem',     // 14px
+    mobile: '0.875rem', // 14px
+    tablet: '0.875rem', // 14px
+    desktop: '0.875rem', // 14px
+    wide: '0.875rem', // 14px
   },
 };
 

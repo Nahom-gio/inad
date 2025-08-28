@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MobileButton from './MobileButton';
 import OptimizedImage from './OptimizedImage';
-import { 
-  breakpoints, 
-  typography, 
-  spacing, 
+import {
+  breakpoints,
+  typography,
+  spacing,
   performanceStyles,
-  mediaQuery 
+  mediaQuery,
 } from '../utils/responsive';
 
 const MobileHero = () => {
@@ -15,7 +15,7 @@ const MobileHero = () => {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [isLowEndDevice, setIsLowEndDevice] = useState(false);
   const videoRef = useRef(null);
-  
+
   // Intersection Observer for performance optimization
   const [heroRef, heroInView] = useInView({
     threshold: 0.1,
@@ -29,13 +29,13 @@ const MobileHero = () => {
     setIsReducedMotion(mediaQuery.matches);
 
     // Check for low-end device (simplified check)
-    const isLowEnd = window.innerWidth <= 768 && 
-                    (navigator.hardwareConcurrency <= 4 || 
-                     navigator.deviceMemory <= 4);
+    const isLowEnd =
+      window.innerWidth <= 768 &&
+      (navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 4);
     setIsLowEndDevice(isLowEnd);
 
     // Listen for changes in reduced motion preference
-    const handleMotionChange = (e) => setIsReducedMotion(e.matches);
+    const handleMotionChange = e => setIsReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handleMotionChange);
 
     return () => mediaQuery.removeEventListener('change', handleMotionChange);
@@ -47,7 +47,7 @@ const MobileHero = () => {
   };
 
   // Handle scroll to section
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = sectionId => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
@@ -67,10 +67,10 @@ const MobileHero = () => {
     overflow: 'hidden',
     backgroundColor: '#000',
     color: 'white',
-    
+
     // Performance optimizations
     ...performanceStyles.hardwareAccelerated,
-    
+
     // Low-end device optimizations
     ...(isLowEndDevice && performanceStyles.lowEndDevice),
   };
@@ -82,7 +82,7 @@ const MobileHero = () => {
     padding: `${spacing.xl} ${spacing.md}`,
     maxWidth: '1200px',
     width: '100%',
-    
+
     // Mobile-first responsive design
     '@media (min-width: 768px)': {
       padding: `${spacing['3xl']} ${spacing.xl}`,
@@ -94,7 +94,7 @@ const MobileHero = () => {
     fontWeight: 'bold',
     marginBottom: spacing.md,
     lineHeight: 1.2,
-    
+
     // Responsive typography
     '@media (min-width: 768px)': {
       fontSize: typography.h1.tablet,
@@ -105,11 +105,13 @@ const MobileHero = () => {
     '@media (min-width: 1280px)': {
       fontSize: typography.h1.wide,
     },
-    
+
     // Animation (simplified for mobile)
     opacity: heroInView ? 1 : 0,
     transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-    transition: isReducedMotion ? 'none' : 'opacity 0.6s ease, transform 0.6s ease',
+    transition: isReducedMotion
+      ? 'none'
+      : 'opacity 0.6s ease, transform 0.6s ease',
   };
 
   const subtitleStyles = {
@@ -119,16 +121,18 @@ const MobileHero = () => {
     maxWidth: '600px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    
+
     // Responsive typography
     '@media (min-width: 768px)': {
       fontSize: typography.body.tablet,
     },
-    
+
     // Animation
     opacity: heroInView ? 0.9 : 0,
     transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-    transition: isReducedMotion ? 'none' : 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
+    transition: isReducedMotion
+      ? 'none'
+      : 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s',
   };
 
   const buttonContainerStyles = {
@@ -136,17 +140,19 @@ const MobileHero = () => {
     flexDirection: 'column',
     gap: spacing.md,
     alignItems: 'center',
-    
+
     // Responsive layout
     '@media (min-width: 640px)': {
       flexDirection: 'row',
       justifyContent: 'center',
     },
-    
+
     // Animation
     opacity: heroInView ? 1 : 0,
     transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-    transition: isReducedMotion ? 'none' : 'opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s',
+    transition: isReducedMotion
+      ? 'none'
+      : 'opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s',
   };
 
   const videoStyles = {
@@ -159,7 +165,7 @@ const MobileHero = () => {
     zIndex: 1,
     opacity: isVideoLoaded ? 0.6 : 0,
     transition: isReducedMotion ? 'none' : 'opacity 0.8s ease',
-    
+
     // Low-end device optimizations
     ...(isLowEndDevice && {
       filter: 'brightness(0.7)',
@@ -181,9 +187,9 @@ const MobileHero = () => {
     <section
       ref={heroRef}
       style={heroStyles}
-      className="mobile-hero"
-      role="banner"
-      aria-label="Hero section"
+      className='mobile-hero'
+      role='banner'
+      aria-label='Hero section'
     >
       {/* Background Video */}
       <video
@@ -193,11 +199,11 @@ const MobileHero = () => {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload='metadata'
         onLoadedData={handleVideoLoad}
-        aria-hidden="true"
+        aria-hidden='true'
       >
-        <source src="/bg.mp4" type="video/mp4" />
+        <source src='/bg.mp4' type='video/mp4' />
         Your browser does not support the video tag.
       </video>
 
@@ -206,27 +212,23 @@ const MobileHero = () => {
 
       {/* Content */}
       <div style={contentStyles}>
-        <h1 style={titleStyles}>
-          INAD PROMOTION
-        </h1>
-        
-        <p style={subtitleStyles}>
-          Experiential Marketing Agency
-        </p>
-        
+        <h1 style={titleStyles}>INAD PROMOTION</h1>
+
+        <p style={subtitleStyles}>Experiential Marketing Agency</p>
+
         <div style={buttonContainerStyles}>
           <MobileButton
-            variant="primary"
-            size="large"
+            variant='primary'
+            size='large'
             onClick={() => scrollToSection('services')}
             fullWidth={window.innerWidth < 640}
           >
             Get Started
           </MobileButton>
-          
+
           <MobileButton
-            variant="outline"
-            size="large"
+            variant='outline'
+            size='large'
             onClick={() => scrollToSection('portfolio')}
             fullWidth={window.innerWidth < 640}
           >
@@ -247,7 +249,7 @@ const MobileHero = () => {
             opacity: 0.7,
             animation: isReducedMotion ? 'none' : 'bounce 2s infinite',
           }}
-          aria-hidden="true"
+          aria-hidden='true'
         >
           <div
             style={{
@@ -263,7 +265,11 @@ const MobileHero = () => {
       {/* CSS for animations and responsive design */}
       <style jsx>{`
         @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {
+          0%,
+          20%,
+          50%,
+          80%,
+          100% {
             transform: translateX(-50%) translateY(0);
           }
           40% {
@@ -273,7 +279,7 @@ const MobileHero = () => {
             transform: translateX(-50%) translateY(-5px);
           }
         }
-        
+
         .mobile-hero {
           position: relative;
           min-height: 100vh;
@@ -284,42 +290,42 @@ const MobileHero = () => {
           background-color: #000;
           color: white;
         }
-        
+
         /* Mobile-first responsive design */
         @media (max-width: ${breakpoints.sm}) {
           .mobile-hero h1 {
             font-size: ${typography.h1.mobile};
             padding: 0 ${spacing.sm};
           }
-          
+
           .mobile-hero p {
             font-size: ${typography.body.mobile};
             padding: 0 ${spacing.sm};
           }
         }
-        
+
         @media (min-width: ${breakpoints.md}) {
           .mobile-hero h1 {
             font-size: ${typography.h1.tablet};
           }
-          
+
           .mobile-hero p {
             font-size: ${typography.body.tablet};
           }
         }
-        
+
         @media (min-width: ${breakpoints.lg}) {
           .mobile-hero h1 {
             font-size: ${typography.h1.desktop};
           }
         }
-        
+
         @media (min-width: ${breakpoints.xl}) {
           .mobile-hero h1 {
             font-size: ${typography.h1.wide};
           }
         }
-        
+
         /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
           .mobile-hero * {
@@ -327,19 +333,19 @@ const MobileHero = () => {
             transition: none !important;
           }
         }
-        
+
         /* Low-end device optimizations */
         @media (max-width: 768px) and (max-device-memory: 4gb) {
           .mobile-hero video {
             filter: brightness(0.7);
             transform: scale(1.1);
           }
-          
+
           .mobile-hero {
             background-color: #1f2937;
           }
         }
-        
+
         /* Touch-friendly improvements */
         @media (hover: none) and (pointer: coarse) {
           .mobile-hero button {

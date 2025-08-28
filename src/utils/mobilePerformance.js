@@ -16,19 +16,21 @@ class MobilePerformanceMonitor {
   detectLowEndDevice() {
     // Check device memory
     const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 4;
-    
+
     // Check CPU cores
-    const hasLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-    
+    const hasLowCPU =
+      navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+
     // Check connection speed
-    const hasSlowConnection = navigator.connection && 
-      (navigator.connection.effectiveType === 'slow-2g' || 
-       navigator.connection.effectiveType === '2g' ||
-       navigator.connection.effectiveType === '3g');
-    
+    const hasSlowConnection =
+      navigator.connection &&
+      (navigator.connection.effectiveType === 'slow-2g' ||
+        navigator.connection.effectiveType === '2g' ||
+        navigator.connection.effectiveType === '3g');
+
     // Check screen size (smaller screens often indicate lower-end devices)
     const hasSmallScreen = window.innerWidth <= 768;
-    
+
     return hasLowMemory || hasLowCPU || hasSlowConnection || hasSmallScreen;
   }
 
@@ -51,7 +53,7 @@ class MobilePerformanceMonitor {
     if ('PerformanceObserver' in window) {
       // Largest Contentful Paint (LCP)
       try {
-        const lcpObserver = new PerformanceObserver((list) => {
+        const lcpObserver = new PerformanceObserver(list => {
           const entries = list.getEntries();
           const lastEntry = entries[entries.length - 1];
           this.metrics.lcp = lastEntry.startTime;
@@ -65,7 +67,7 @@ class MobilePerformanceMonitor {
 
       // First Input Delay (FID)
       try {
-        const fidObserver = new PerformanceObserver((list) => {
+        const fidObserver = new PerformanceObserver(list => {
           const entries = list.getEntries();
           entries.forEach(entry => {
             this.metrics.fid = entry.processingStart - entry.startTime;
@@ -81,7 +83,7 @@ class MobilePerformanceMonitor {
       // Cumulative Layout Shift (CLS)
       try {
         let clsValue = 0;
-        const clsObserver = new PerformanceObserver((list) => {
+        const clsObserver = new PerformanceObserver(list => {
           const entries = list.getEntries();
           entries.forEach(entry => {
             if (!entry.hadRecentInput) {
@@ -103,7 +105,7 @@ class MobilePerformanceMonitor {
   setupNetworkObserver() {
     if ('connection' in navigator) {
       const connection = navigator.connection;
-      
+
       this.metrics.network = {
         effectiveType: connection.effectiveType,
         downlink: connection.downlink,
@@ -123,7 +125,7 @@ class MobilePerformanceMonitor {
       };
 
       connection.addEventListener('change', handleNetworkChange);
-      
+
       // Store cleanup function
       this.cleanupFunctions.push(() => {
         connection.removeEventListener('change', handleNetworkChange);
@@ -152,11 +154,14 @@ class MobilePerformanceMonitor {
 
         battery.addEventListener('levelchange', handleBatteryLevelChange);
         battery.addEventListener('chargingchange', handleBatteryChargingChange);
-        
+
         // Store cleanup functions
         this.cleanupFunctions.push(() => {
           battery.removeEventListener('levelchange', handleBatteryLevelChange);
-          battery.removeEventListener('chargingchange', handleBatteryChargingChange);
+          battery.removeEventListener(
+            'chargingchange',
+            handleBatteryChargingChange
+          );
         });
       });
     }
@@ -166,20 +171,20 @@ class MobilePerformanceMonitor {
   setupMemoryObserver() {
     if ('memory' in performance) {
       const memory = performance.memory;
-      
+
       // Check memory every 30 seconds instead of continuously to prevent memory leaks
       this.memoryCheckInterval = setInterval(() => {
         const memoryUsage = memory.usedJSHeapSize / memory.jsHeapSizeLimit;
-        
+
         // Only store memory data if usage is high to prevent memory accumulation
         if (memoryUsage > 0.7) {
           this.metrics.memory = {
             usedJSHeapSize: memory.usedJSHeapSize,
             totalJSHeapSize: memory.totalJSHeapSize,
             jsHeapSizeLimit: memory.jsHeapSizeLimit,
-            usage: memoryUsage
+            usage: memoryUsage,
           };
-          
+
           // Warn if memory usage is high
           if (memoryUsage > 0.8) {
             this.logMetric('High Memory Usage', memoryUsage);
@@ -194,7 +199,7 @@ class MobilePerformanceMonitor {
     if ('IntersectionObserver' in window) {
       // Monitor elements entering viewport for lazy loading optimization
       this.intersectionObserver = new IntersectionObserver(
-        (entries) => {
+        entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               // Element is now visible, could trigger lazy loading
@@ -230,12 +235,12 @@ class MobilePerformanceMonitor {
     if (!this.metrics[name]) {
       this.metrics[name] = [];
     }
-    
+
     // Keep only last 50 entries for each metric to prevent memory accumulation
     if (this.metrics[name].length >= 50) {
       this.metrics[name].shift();
     }
-    
+
     this.metrics[name].push(metric);
 
     // Log to console in development
@@ -260,7 +265,8 @@ class MobilePerformanceMonitor {
     if (name === 'LCP' && value > 2500) {
       warnings.push({
         type: 'warning',
-        message: 'LCP is above 2.5s threshold. Consider optimizing images and reducing render-blocking resources.',
+        message:
+          'LCP is above 2.5s threshold. Consider optimizing images and reducing render-blocking resources.',
         metric: 'LCP',
         value,
         threshold: 2500,
@@ -271,7 +277,8 @@ class MobilePerformanceMonitor {
     if (name === 'FID' && value > 100) {
       warnings.push({
         type: 'warning',
-        message: 'FID is above 100ms threshold. Consider reducing JavaScript execution time.',
+        message:
+          'FID is above 100ms threshold. Consider reducing JavaScript execution time.',
         metric: 'FID',
         value,
         threshold: 100,
@@ -293,7 +300,8 @@ class MobilePerformanceMonitor {
     if (name === 'High Memory Usage' && value > 0.9) {
       warnings.push({
         type: 'error',
-        message: 'Memory usage is critically high. Consider implementing memory cleanup.',
+        message:
+          'Memory usage is critically high. Consider implementing memory cleanup.',
         metric: 'Memory Usage',
         value,
         threshold: 0.9,
@@ -337,8 +345,10 @@ class MobilePerformanceMonitor {
       cls: this.getCLSScore(),
     };
 
-    const averageScore = Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length;
-    
+    const averageScore =
+      Object.values(scores).reduce((a, b) => a + b, 0) /
+      Object.keys(scores).length;
+
     return {
       overall: Math.round(averageScore),
       lcp: scores.lcp,
@@ -379,19 +389,27 @@ class MobilePerformanceMonitor {
     const recommendations = [];
 
     if (scores.lcp < 75) {
-      recommendations.push('Optimize images and reduce render-blocking resources');
+      recommendations.push(
+        'Optimize images and reduce render-blocking resources'
+      );
     }
 
     if (scores.fid < 75) {
-      recommendations.push('Reduce JavaScript execution time and break up long tasks');
+      recommendations.push(
+        'Reduce JavaScript execution time and break up long tasks'
+      );
     }
 
     if (scores.cls < 75) {
-      recommendations.push('Fix layout shifts by reserving space for dynamic content');
+      recommendations.push(
+        'Fix layout shifts by reserving space for dynamic content'
+      );
     }
 
     if (this.isLowEndDevice) {
-      recommendations.push('Consider implementing progressive enhancement for low-end devices');
+      recommendations.push(
+        'Consider implementing progressive enhancement for low-end devices'
+      );
     }
 
     return recommendations;
@@ -409,7 +427,7 @@ class MobilePerformanceMonitor {
         console.warn('Failed to disconnect observer:', error);
       }
     });
-    
+
     // Disconnect intersection observer
     if (this.intersectionObserver) {
       try {
@@ -418,18 +436,18 @@ class MobilePerformanceMonitor {
         console.warn('Failed to disconnect intersection observer:', error);
       }
     }
-    
+
     // Clear intervals
     if (this.memoryCheckInterval) {
       clearInterval(this.memoryCheckInterval);
       this.memoryCheckInterval = null;
     }
-    
+
     if (this.batteryCheckInterval) {
       clearInterval(this.batteryCheckInterval);
       this.batteryCheckInterval = null;
     }
-    
+
     // Execute cleanup functions
     if (this.cleanupFunctions) {
       this.cleanupFunctions.forEach(cleanupFn => {
@@ -442,12 +460,12 @@ class MobilePerformanceMonitor {
         }
       });
     }
-    
+
     // Clear stored data
     this.observers = [];
     this.cleanupFunctions = [];
     this.metrics = {};
-    
+
     if (process.env.NODE_ENV === 'development') {
       console.log('Mobile performance monitoring destroyed and cleaned up');
     }
@@ -478,7 +496,7 @@ if (typeof window !== 'undefined') {
   window.addEventListener('beforeunload', () => {
     performanceMonitor.destroy();
   });
-  
+
   // Also cleanup on page hide for mobile devices
   window.addEventListener('pagehide', () => {
     performanceMonitor.destroy();

@@ -4,11 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // Custom render function that includes providers
 const AllTheProviders = ({ children }) => {
-  return (
-    <BrowserRouter>
-      {children}
-    </BrowserRouter>
-  );
+  return <BrowserRouter>{children}</BrowserRouter>;
 };
 
 const customRender = (ui, options) =>
@@ -115,7 +111,7 @@ export const cleanupGlobalMocks = () => {
 };
 
 // Custom matchers
-export const expectElementToBeVisible = (element) => {
+export const expectElementToBeVisible = element => {
   expect(element).toBeInTheDocument();
   expect(element).toBeVisible();
 };
@@ -128,16 +124,16 @@ export const expectElementToHaveClass = (element, className) => {
   expect(element).toHaveClass(className);
 };
 
-export const expectElementToBeDisabled = (element) => {
+export const expectElementToBeDisabled = element => {
   expect(element).toBeDisabled();
 };
 
-export const expectElementToBeEnabled = (element) => {
+export const expectElementToBeEnabled = element => {
   expect(element).not.toBeDisabled();
 };
 
 // Async utilities
-export const waitForElementToBeRemoved = async (element) => {
+export const waitForElementToBeRemoved = async element => {
   await new Promise(resolve => setTimeout(resolve, 0));
   expect(element).not.toBeInTheDocument();
 };

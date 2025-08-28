@@ -6,7 +6,7 @@ export const focusManager = {
   trapFocus: (container, firstFocusable, lastFocusable) => {
     if (!container || !firstFocusable || !lastFocusable) return;
 
-    const handleTabKey = (e) => {
+    const handleTabKey = e => {
       if (e.key === 'Tab') {
         if (e.shiftKey) {
           if (document.activeElement === firstFocusable) {
@@ -27,26 +27,26 @@ export const focusManager = {
   },
 
   // Focus first focusable element in a container
-  focusFirst: (container) => {
+  focusFirst: container => {
     if (!container) return;
-    
+
     const focusableElements = container.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     if (focusableElements.length > 0) {
       focusableElements[0].focus();
     }
   },
 
   // Focus last focusable element in a container
-  focusLast: (container) => {
+  focusLast: container => {
     if (!container) return;
-    
+
     const focusableElements = container.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     if (focusableElements.length > 0) {
       focusableElements[focusableElements.length - 1].focus();
     }
@@ -57,18 +57,18 @@ export const focusManager = {
     return document.activeElement;
   },
 
-  restoreFocus: (element) => {
+  restoreFocus: element => {
     if (element && typeof element.focus === 'function') {
       element.focus();
     }
-  }
+  },
 };
 
 // Keyboard navigation utilities
 export const keyboardNavigation = {
   // Handle arrow key navigation in lists
   handleArrowKeys: (currentIndex, itemCount, onIndexChange) => {
-    return (e) => {
+    return e => {
       switch (e.key) {
         case 'ArrowDown':
           e.preventDefault();
@@ -91,8 +91,8 @@ export const keyboardNavigation = {
   },
 
   // Handle enter and space key activation
-  handleActivation: (onActivate) => {
-    return (e) => {
+  handleActivation: onActivate => {
+    return e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         onActivate();
@@ -101,14 +101,14 @@ export const keyboardNavigation = {
   },
 
   // Handle escape key
-  handleEscape: (onEscape) => {
-    return (e) => {
+  handleEscape: onEscape => {
+    return e => {
       if (e.key === 'Escape') {
         e.preventDefault();
         onEscape();
       }
     };
-  }
+  },
 };
 
 // Screen reader utilities
@@ -117,7 +117,7 @@ export const screenReader = {
   announce: (message, priority = 'polite') => {
     // Create a live region for announcements
     let liveRegion = document.getElementById('sr-announcements');
-    
+
     if (!liveRegion) {
       liveRegion = document.createElement('div');
       liveRegion.id = 'sr-announcements';
@@ -129,7 +129,7 @@ export const screenReader = {
 
     // Clear previous announcements
     liveRegion.textContent = '';
-    
+
     // Set new announcement
     setTimeout(() => {
       liveRegion.textContent = message;
@@ -137,9 +137,11 @@ export const screenReader = {
   },
 
   // Announce form errors
-  announceErrors: (errors) => {
+  announceErrors: errors => {
     const errorCount = Object.keys(errors).length;
-    const message = `Form validation failed. ${errorCount} field${errorCount > 1 ? 's have' : ' has'} errors.`;
+    const message = `Form validation failed. ${errorCount} field${
+      errorCount > 1 ? 's have' : ' has'
+    } errors.`;
     screenReader.announce(message, 'assertive');
   },
 
@@ -147,7 +149,7 @@ export const screenReader = {
   announceStatus: (status, message) => {
     const statusMessage = `${status}: ${message}`;
     screenReader.announce(statusMessage, 'polite');
-  }
+  },
 };
 
 // ARIA utilities
@@ -206,7 +208,7 @@ export const ariaUtils = {
     if (element) {
       element.setAttribute('aria-label', label);
     }
-  }
+  },
 };
 
 // Color contrast utilities
@@ -237,7 +239,7 @@ export const colorContrast = {
   meetsWCAGAAA: (contrastRatio, isLargeText = false) => {
     const threshold = isLargeText ? 4.5 : 7;
     return contrastRatio >= threshold;
-  }
+  },
 };
 
 // Touch target utilities
@@ -246,29 +248,33 @@ export const touchTargets = {
   MIN_SIZE: 44,
 
   // Check if element meets minimum touch target size
-  meetsMinimumSize: (element) => {
+  meetsMinimumSize: element => {
     if (!element) return false;
-    
+
     const rect = element.getBoundingClientRect();
     const minSize = touchTargets.MIN_SIZE;
-    
+
     return rect.width >= minSize && rect.height >= minSize;
   },
 
   // Add padding to ensure minimum touch target size
-  ensureMinimumSize: (element) => {
+  ensureMinimumSize: element => {
     if (!element) return;
-    
+
     const rect = element.getBoundingClientRect();
     const minSize = touchTargets.MIN_SIZE;
-    
+
     if (rect.width < minSize || rect.height < minSize) {
-      const currentPadding = parseInt(window.getComputedStyle(element).padding) || 0;
-      const neededPadding = Math.max(0, (minSize - Math.min(rect.width, rect.height)) / 2);
-      
+      const currentPadding =
+        parseInt(window.getComputedStyle(element).padding) || 0;
+      const neededPadding = Math.max(
+        0,
+        (minSize - Math.min(rect.width, rect.height)) / 2
+      );
+
       element.style.padding = `${currentPadding + neededPadding}px`;
     }
-  }
+  },
 };
 
 // Animation accessibility utilities
@@ -279,7 +285,7 @@ export const animationAccessibility = {
   },
 
   // Disable animations if user prefers reduced motion
-  disableAnimations: (element) => {
+  disableAnimations: element => {
     if (animationAccessibility.prefersReducedMotion()) {
       element.style.animation = 'none';
       element.style.transition = 'none';
@@ -299,30 +305,33 @@ export const animationAccessibility = {
       `;
       document.head.appendChild(style);
     }
-  }
+  },
 };
 
 // Form accessibility utilities
 export const formAccessibility = {
   // Validate form field accessibility
-  validateField: (field) => {
+  validateField: field => {
     const issues = [];
-    
+
     if (!field.id) {
       issues.push('Field missing ID attribute');
     }
-    
-    if (!field.getAttribute('aria-label') && !field.getAttribute('aria-labelledby')) {
+
+    if (
+      !field.getAttribute('aria-label') &&
+      !field.getAttribute('aria-labelledby')
+    ) {
       const label = document.querySelector(`label[for="${field.id}"]`);
       if (!label) {
         issues.push('Field missing label or aria-label');
       }
     }
-    
+
     if (field.required && !field.getAttribute('aria-required')) {
       issues.push('Required field missing aria-required attribute');
     }
-    
+
     return issues;
   },
 
@@ -330,7 +339,7 @@ export const formAccessibility = {
   addErrorAnnouncement: (field, errorMessage) => {
     const errorId = `${field.id}-error`;
     const errorElement = document.getElementById(errorId);
-    
+
     if (!errorElement) {
       const error = document.createElement('div');
       error.id = errorId;
@@ -338,28 +347,28 @@ export const formAccessibility = {
       error.setAttribute('role', 'alert');
       error.setAttribute('aria-live', 'polite');
       error.textContent = errorMessage;
-      
+
       field.parentNode.appendChild(error);
     } else {
       errorElement.textContent = errorMessage;
     }
-    
+
     field.setAttribute('aria-invalid', 'true');
     field.setAttribute('aria-describedby', errorId);
   },
 
   // Remove error announcement from form field
-  removeErrorAnnouncement: (field) => {
+  removeErrorAnnouncement: field => {
     const errorId = `${field.id}-error`;
     const errorElement = document.getElementById(errorId);
-    
+
     if (errorElement) {
       errorElement.remove();
     }
-    
+
     field.removeAttribute('aria-invalid');
     field.removeAttribute('aria-describedby');
-  }
+  },
 };
 
 // Export all utilities
@@ -371,5 +380,5 @@ export default {
   colorContrast,
   touchTargets,
   animationAccessibility,
-  formAccessibility
+  formAccessibility,
 };

@@ -3,12 +3,12 @@ import React from 'react';
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      hasError: false, 
-      error: null, 
+    this.state = {
+      hasError: false,
+      error: null,
       errorInfo: null,
       errorId: null,
-      retryCount: 0
+      retryCount: 0,
     };
     this.maxRetries = 3;
   }
@@ -25,8 +25,10 @@ class ErrorBoundary extends React.Component {
     }
 
     // Generate unique error ID for tracking
-    const errorId = `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
+    const errorId = `error-${Date.now()}-${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
     this.setState({
       error,
       errorInfo,
@@ -44,11 +46,13 @@ class ErrorBoundary extends React.Component {
       url: window.location.href,
       viewport: `${window.innerWidth}x${window.innerHeight}`,
       referrer: document.referrer,
-      performance: performance?.navigation ? {
-        type: performance.navigation.type,
-        redirectCount: performance.navigation.redirectCount
-      } : null,
-      retryCount: this.state.retryCount
+      performance: performance?.navigation
+        ? {
+            type: performance.navigation.type,
+            redirectCount: performance.navigation.redirectCount,
+          }
+        : null,
+      retryCount: this.state.retryCount,
     };
 
     // Log to console in development
@@ -62,7 +66,7 @@ class ErrorBoundary extends React.Component {
     if (process.env.NODE_ENV === 'production') {
       this.sendErrorToMonitoring(errorReport);
     }
-    
+
     // Store error in localStorage for debugging (development only)
     if (process.env.NODE_ENV === 'development') {
       const errors = JSON.parse(localStorage.getItem('app_errors') || '[]');
@@ -72,7 +76,7 @@ class ErrorBoundary extends React.Component {
   }
 
   // Send error to monitoring service
-  sendErrorToMonitoring = async (errorReport) => {
+  sendErrorToMonitoring = async errorReport => {
     try {
       // In production, send to your error monitoring service
       // Example: Sentry, LogRocket, etc.
@@ -83,8 +87,8 @@ class ErrorBoundary extends React.Component {
           custom_parameters: {
             error_id: errorReport.errorId,
             component_stack: errorReport.componentStack,
-            retry_count: errorReport.retryCount
-          }
+            retry_count: errorReport.retryCount,
+          },
         });
       }
     } catch (error) {
@@ -95,14 +99,14 @@ class ErrorBoundary extends React.Component {
   // Reset error state and retry
   handleRetry = () => {
     const { retryCount } = this.state;
-    
+
     if (retryCount < this.maxRetries) {
       this.setState({
         hasError: false,
         error: null,
         errorInfo: null,
         errorId: null,
-        retryCount: retryCount + 1
+        retryCount: retryCount + 1,
       });
     } else {
       // After max retries, reload the page
@@ -120,7 +124,7 @@ class ErrorBoundary extends React.Component {
 
   handleReportError = () => {
     const { error, errorInfo, errorId } = this.state;
-    
+
     // Create error report
     const errorReport = {
       errorId,
@@ -136,9 +140,11 @@ class ErrorBoundary extends React.Component {
     if (process.env.NODE_ENV === 'development') {
       console.log('Error Report:', errorReport);
     }
-    
+
     // For now, just show an alert
-    alert(`Error reported with ID: ${errorId}. Please contact support with this ID.`);
+    alert(
+      `Error reported with ID: ${errorId}. Please contact support with this ID.`
+    );
   };
 
   // Cleanup on unmount
@@ -152,89 +158,93 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       const { errorId, retryCount } = this.state;
-      
+
       return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
-            <div className="mb-6">
-              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+        <div className='min-h-screen bg-gray-50 flex items-center justify-center px-4'>
+          <div className='max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center'>
+            <div className='mb-6'>
+              <div className='mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4'>
                 <svg
-                  className="h-6 w-6 text-red-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  className='h-6 w-6 text-red-600'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                     strokeWidth={2}
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z'
                   />
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              <h2 className='text-xl font-semibold text-gray-900 mb-2'>
                 Something went wrong
               </h2>
-              <p className="text-gray-600 mb-4">
-                We're sorry, but something unexpected happened. Our team has been notified.
+              <p className='text-gray-600 mb-4'>
+                We're sorry, but something unexpected happened. Our team has
+                been notified.
               </p>
               {errorId && (
-                <p className="text-sm text-gray-500 mb-2">
-                  Error ID: <code className="bg-gray-100 px-2 py-1 rounded">{errorId}</code>
+                <p className='text-sm text-gray-500 mb-2'>
+                  Error ID:{' '}
+                  <code className='bg-gray-100 px-2 py-1 rounded'>
+                    {errorId}
+                  </code>
                 </p>
               )}
               {retryCount > 0 && (
-                <p className="text-sm text-gray-500 mb-4">
+                <p className='text-sm text-gray-500 mb-4'>
                   Retry attempt: {retryCount} of {this.maxRetries}
                 </p>
               )}
             </div>
-            
-            <div className="space-y-3">
+
+            <div className='space-y-3'>
               {retryCount < this.maxRetries ? (
                 <button
                   onClick={this.handleRetry}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className='w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors'
                 >
                   Try Again
                 </button>
               ) : (
                 <button
                   onClick={this.handleReload}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className='w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors'
                 >
                   Reload Page
                 </button>
               )}
-              
+
               <button
                 onClick={this.handleGoHome}
-                className="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors"
+                className='w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors'
               >
                 Go to Homepage
               </button>
-              
+
               <button
                 onClick={this.handleReportError}
-                className="w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors"
+                className='w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors'
               >
                 Report This Error
               </button>
             </div>
-            
+
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <details className="mt-6 text-left">
-                <summary className="cursor-pointer text-sm text-gray-600 hover:text-gray-800">
+              <details className='mt-6 text-left'>
+                <summary className='cursor-pointer text-sm text-gray-600 hover:text-gray-800'>
                   Show Error Details (Development)
                 </summary>
-                <div className="mt-2 p-4 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40">
-                  <div className="mb-2">
+                <div className='mt-2 p-4 bg-gray-100 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40'>
+                  <div className='mb-2'>
                     <strong>Error:</strong> {this.state.error.toString()}
                   </div>
                   {this.state.errorInfo && (
                     <div>
                       <strong>Component Stack:</strong>
-                      <pre className="whitespace-pre-wrap mt-1">
+                      <pre className='whitespace-pre-wrap mt-1'>
                         {this.state.errorInfo.componentStack}
                       </pre>
                     </div>

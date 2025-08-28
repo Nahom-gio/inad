@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     // Initialize performance monitoring
     initPerformanceMonitoring();
-    
+
     // Register service worker for PWA capabilities
     registerServiceWorker();
   }, []);
@@ -30,7 +30,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="App bg-dark-900 text-white min-h-screen w-full overflow-x-hidden layout-stable stable-container">
+        <div className='App bg-dark-900 text-white min-h-screen w-full overflow-x-hidden layout-stable stable-container'>
           <Navbar />
           <Hero />
           <ServiceHighlights />

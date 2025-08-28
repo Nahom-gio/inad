@@ -27,7 +27,7 @@ const Navbar = () => {
 
   // Close mobile menu on escape key
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = e => {
       if (e.key === 'Escape' && isOpen) {
         setIsOpen(false);
       }
@@ -39,7 +39,7 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = sectionId => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -81,7 +81,7 @@ const Navbar = () => {
     { id: 'services', label: 'Services', description: 'View our services' },
     { id: 'portfolio', label: 'Portfolio', description: 'See our work' },
     { id: 'clients', label: 'Clients', description: 'Client testimonials' },
-    { id: 'contact', label: 'Contact', description: 'Get in touch with us' }
+    { id: 'contact', label: 'Contact', description: 'Get in touch with us' },
   ];
 
   return (
@@ -89,48 +89,48 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full layout-stable ${
-        scrolled 
-          ? 'bg-dark-800/95 backdrop-blur-md shadow-lg' 
+        scrolled
+          ? 'bg-dark-800/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
-      role="navigation"
-      aria-label="Main navigation"
+      role='navigation'
+      aria-label='Main navigation'
     >
-      <div className="container-custom w-full mobile-stable-layout">
-        <div className="flex items-center h-16 sm:h-20 w-full mobile-fixed-dimensions">
+      <div className='container-custom w-full mobile-stable-layout'>
+        <div className='flex items-center h-16 sm:h-20 w-full mobile-fixed-dimensions'>
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-lg sm:text-xl md:text-2xl font-bold gradient-text cursor-pointer mobile-fixed-dimensions"
+            className='text-lg sm:text-xl md:text-2xl font-bold gradient-text cursor-pointer mobile-fixed-dimensions'
             onClick={() => scrollToSection('home')}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 scrollToSection('home');
               }
             }}
-            role="button"
+            role='button'
             tabIndex={0}
-            aria-label="INAD PROMOTION - Go to homepage"
+            aria-label='INAD PROMOTION - Go to homepage'
           >
             INAD PROMOTION
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8 mobile-fixed-dimensions ml-auto">
+          <div className='hidden md:flex items-center space-x-6 lg:space-x-8 mobile-fixed-dimensions ml-auto'>
             {navItems.map((item, index) => (
               <motion.button
                 key={item.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-white hover:text-primary-400 transition-colors duration-300 font-medium text-sm lg:text-base mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-md px-2 py-1"
+                className='text-white hover:text-primary-400 transition-colors duration-300 font-medium text-sm lg:text-base mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-md px-2 py-1'
                 onClick={() => scrollToSection(item.id)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
+                onKeyDown={e => handleKeyDown(e, index)}
                 aria-label={item.description}
                 aria-describedby={`nav-${item.id}-desc`}
               >
                 {item.label}
-                <span id={`nav-${item.id}-desc`} className="sr-only">
+                <span id={`nav-${item.id}-desc`} className='sr-only'>
                   {item.description}
                 </span>
               </motion.button>
@@ -138,9 +138,9 @@ const Navbar = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary text-sm lg:text-base mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900"
+              className='btn-primary text-sm lg:text-base mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900'
               onClick={() => scrollToSection('contact')}
-              aria-label="Get started - Contact us to begin your project"
+              aria-label='Get started - Contact us to begin your project'
             >
               Get Started
             </motion.button>
@@ -149,12 +149,12 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="md:hidden text-white text-xl sm:text-2xl p-2 mobile-fixed-dimensions ml-auto focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-md"
+            className='md:hidden text-white text-xl sm:text-2xl p-2 mobile-fixed-dimensions ml-auto focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-md'
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Close mobile menu" : "Open mobile menu"}
+            aria-label={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
             aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            aria-haspopup="true"
+            aria-controls='mobile-menu'
+            aria-haspopup='true'
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </motion.button>
@@ -165,40 +165,40 @@ const Navbar = () => {
           {isOpen && (
             <motion.div
               ref={mobileMenuRef}
-              id="mobile-menu"
+              id='mobile-menu'
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-dark-800/95 backdrop-blur-md rounded-b-2xl overflow-hidden border-t border-dark-600/30 w-full mobile-stable-layout"
-              role="menu"
-              aria-label="Mobile navigation menu"
+              className='md:hidden bg-dark-800/95 backdrop-blur-md rounded-b-2xl overflow-hidden border-t border-dark-600/30 w-full mobile-stable-layout'
+              role='menu'
+              aria-label='Mobile navigation menu'
             >
-              <div className="py-4 sm:py-6 space-y-2 sm:space-y-4 w-full mobile-fixed-dimensions">
+              <div className='py-4 sm:py-6 space-y-2 sm:space-y-4 w-full mobile-fixed-dimensions'>
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.id}
                     ref={index === 0 ? firstMenuItemRef : null}
                     whileHover={{ x: 10 }}
-                    className="block w-full text-left text-white hover:text-primary-400 transition-colors duration-300 font-medium px-6 py-3 sm:py-4 text-base sm:text-lg mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-800 rounded-md"
+                    className='block w-full text-left text-white hover:text-primary-400 transition-colors duration-300 font-medium px-6 py-3 sm:py-4 text-base sm:text-lg mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-800 rounded-md'
                     onClick={() => scrollToSection(item.id)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    role="menuitem"
+                    onKeyDown={e => handleKeyDown(e, index)}
+                    role='menuitem'
                     tabIndex={focusedIndex === index ? 0 : -1}
                     aria-label={item.description}
                     aria-describedby={`mobile-nav-${item.id}-desc`}
                   >
                     {item.label}
-                    <span id={`mobile-nav-${item.id}-desc`} className="sr-only">
+                    <span id={`mobile-nav-${item.id}-desc`} className='sr-only'>
                       {item.description}
                     </span>
                   </motion.button>
                 ))}
-                <div className="px-6 pt-2 sm:pt-4 w-full mobile-fixed-dimensions">
-                  <button 
-                    className="btn-primary w-full text-base sm:text-lg py-3 sm:py-4 mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-800"
+                <div className='px-6 pt-2 sm:pt-4 w-full mobile-fixed-dimensions'>
+                  <button
+                    className='btn-primary w-full text-base sm:text-lg py-3 sm:py-4 mobile-fixed-dimensions focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-800'
                     onClick={() => scrollToSection('contact')}
-                    role="menuitem"
-                    aria-label="Get started - Contact us to begin your project"
+                    role='menuitem'
+                    aria-label='Get started - Contact us to begin your project'
                   >
                     Get Started
                   </button>
