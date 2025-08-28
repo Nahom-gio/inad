@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { motion } from 'framer-motion';
-
 import { useInView } from 'react-intersection-observer';
-
 import {
   FaEnvelope,
-  FaWhatsapp,
   FaPhone,
+  FaMapMarkerAlt,
+  FaClock,
   FaLinkedin,
-  FaExclamationTriangle,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
   FaCheckCircle,
+  FaExclamationTriangle,
 } from 'react-icons/fa';
 
 import { submitContactForm } from '../utils/api';
-
 import {
   checkRateLimit,
   validateHoneypot,
@@ -280,7 +281,7 @@ const Contact = () => {
       link: 'mailto:hello@inadpromotion.com',
     },
     {
-      icon: <FaWhatsapp className='text-xl sm:text-2xl' />,
+      icon: <FaPhone className='text-xl sm:text-2xl' />,
       title: 'WhatsApp',
       value: '+1 (555) 123-4567',
       link: 'https://wa.me/15551234567',
@@ -774,10 +775,10 @@ const Contact = () => {
             </div>
 
             <div className='mt-8 sm:mt-12 p-4 sm:p-6 bg-dark-700/30 rounded-2xl border border-dark-600/20'>
-                          <h4
-              className='text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3'
-              aria-level='4'
-            >
+              <h4
+                className='text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3'
+                aria-level='4'
+              >
                 Office Hours
               </h4>
               <div

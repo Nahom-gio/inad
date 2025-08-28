@@ -726,7 +726,7 @@ class PerformanceMonitor {
     try {
       const data = {
         metric: name,
-        value: value,
+        value,
         timestamp: new Date().toISOString(),
         url: window.location.href,
         userAgent: navigator.userAgent,

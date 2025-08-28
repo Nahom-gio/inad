@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-
 import { useInView } from 'react-intersection-observer';
-
 import { FaCalendarAlt, FaUsers, FaHeart } from 'react-icons/fa';
 
 const About = () => {
