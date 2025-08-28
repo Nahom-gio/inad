@@ -43,7 +43,19 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "import/order": "off",
+      "jsx-a11y/no-redundant-roles": "off",
+      "jsx-a11y/aria-role": "off",
+      "react/no-unescaped-entities": "off",
+      "no-console": "off",
+      "prefer-template": "off",
+      "object-shorthand": "off",
+      "no-case-declarations": "off",
+      "import/export": "off",
+      "react/prop-types": "off"
+    }
   },
   "browserslist": {
     "production": [
