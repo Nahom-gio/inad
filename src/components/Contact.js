@@ -12,7 +12,6 @@ import {
   FaCheckCircle,
   FaExclamationTriangle,
 } from 'react-icons/fa';
-
 import { useInView } from 'react-intersection-observer';
 
 import { submitContactForm } from '../utils/api';

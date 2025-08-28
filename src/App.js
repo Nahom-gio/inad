@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-
 import About from './components/About';
 import Blog from './components/Blog';
 import ClientLogos from './components/ClientLogos';
